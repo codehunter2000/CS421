@@ -212,9 +212,19 @@ int scanner(tokentype& the_type, string& w)
 
   if (mytoken(w))
     { the_type = MYTOKEN; }
-  
+
   // ** add other if-then's here in the right order to go through
   // ** all FAs one by one and set the_type to be IDENT, REAL or INT.
+
+
+  else if (ident_token(w))
+	  the_type = IDENT;
+  else if (real_token(w))
+	  the_type = REAL;
+  else if (integer_token(w))
+	  the_type = INT;
+
+
 
   else //none of the FAs returned TRUE
     { cout << "Lexical Error: The string is not in my language" << endl;
