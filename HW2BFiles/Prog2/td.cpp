@@ -6,12 +6,11 @@ using namespace std;
 
 //--------------------------------------
 // CS421 File td.cpp for HW2B
-// Your name: **
+// Your name: *Gabriel Hunt*
 //--------------------------------------
 
 // ** Complete this to fit the HW2B specification - look for **
 // ** Must have the same types of tracing couts as my demo program.
-
 
 // info on each DFA
 struct info
@@ -38,6 +37,19 @@ void readTables()
    ifstream fin ("trs.txt", ios::in);
    ifstream fin2 ("dfa.txt", ios::in);
    // ** read in the files into TRS and DFA
+
+   string wTRS;
+   string wDFA;
+   fin >> wTRS;
+   for(int i = 0; i < 10; i++)
+	   for (int j = 0; j < 4; j++)
+	   {
+		   DFA[i][j] = wTRS;
+	   }
+   fin.close();
+
+
+
 }
 
 bool accept(info dfa, string word)
