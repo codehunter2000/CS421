@@ -70,10 +70,16 @@ bool ident_token(string s)
 		if ((state == 0 && s[charpos] == 'a') || (state == 0 && s[charpos] == 'b'))
 			state = 1;
 		
-		if ((state == 1 && s[charpos] == 'a') || (state == 1 && s[charpos] == 'b')
+		else if ((state == 1 && s[charpos] == 'a') || (state == 1 && s[charpos] == 'b')
 			|| (state == 1 && s[charpos] == '2') || (state == 1 && s[charpos] == '3')
 				|| (state == 1 && s[charpos] == '_'))
 			state = 2;
+
+		else if ((state == 2 && s[charpos] == 'a') || (state == 2 && s[charpos] == 'b')
+			|| (state == 2 && s[charpos] == '2') || (state == 2 && s[charpos] == '3')
+			|| (state == 2 && s[charpos] == '_'))
+			state = 2;
+
 		else
 		{
 			cout << "I am stuck finding IDs.  " << state << endl;
@@ -107,10 +113,10 @@ bool real_token(string s)
 		cout << "current state: " << state << endl;
 		cout << "character: " << s[charpos] << endl;
 
-		if ((state == 0 && s[charpos] == '2') || (state == 0 && s[charpos] == '3'))
+		if ((state == 0 && s[charpos] == '2') || (state == 0 && s[charpos] == '3') || (state == 0 && s[charpos] == '.'))
 			state = 1;
 
-		if ((state == 1 && s[charpos] == '2') || (state == 1 && s[charpos] == '3')
+		else if ((state == 1 && s[charpos] == '2') || (state == 1 && s[charpos] == '3')
 			|| (state == 1 && s[charpos] == '.'))
 			state = 2;
 
@@ -148,8 +154,10 @@ bool integer_token(string s)
 		cout << "current state: " << state << endl;
 		cout << "character: " << s[charpos] << endl;
 
-		if ((state == 1 && s[charpos] == '2') || (state == 1 && s[charpos] == '3'))
-			state = 2;
+		if ((state == 0 && s[charpos] == '2') || (state == 0 && s[charpos] == '3'))
+			state = 1;
+		else if ((state == 1 && s[charpos] == '2') || (state == 1 && s[charpos] == '3'))
+			state = 1;
 
 		else
 		{
@@ -196,6 +204,7 @@ int main()
 
   cout << "End of File encountered" << endl;  
   fin.close();
+
 }// end of main 
 
 
@@ -229,6 +238,9 @@ int scanner(tokentype& the_type, string& w)
   else //none of the FAs returned TRUE
     { cout << "Lexical Error: The string is not in my language" << endl;
       the_type = ERROR; }
+
+
+  return 1;
 
 }//the very end of scanner
 
