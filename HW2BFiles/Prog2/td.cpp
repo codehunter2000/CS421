@@ -27,8 +27,25 @@ int  TRS[10][4];  // store trs's - states 0-9 and chars a b c d
 
 void displayTables()
 {
-  // ** display DFA nicely labeled
   // ** display TRS nicely labeled
+	cout << "\n        a b c d" << endl;
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "State " << i << ":";
+		for (int j = 0; j < 4; j++)
+		{
+			if (TRS[i][j] != -1)
+				cout << TRS[i][j];
+			else
+				cout << " ";
+		}
+		cout << endl;
+	}
+
+  // ** display DFA nicely labeled
+	for (info elem : DFA)
+		cout << "Token " << elem.name << ": " << elem.startstate << " is start and ends in " << elem.finalstate << endl;
+
 }
 
 void readTables()
@@ -38,17 +55,36 @@ void readTables()
    ifstream fin2 ("dfa.txt", ios::in);
    // ** read in the files into TRS and DFA
 
-   string wTRS;
-   string wDFA;
-   fin >> wTRS;
-   for(int i = 0; i < 10; i++)
-	   for (int j = 0; j < 4; j++)
-	   {
-		   DFA[i][j] = wTRS;
-	   }
+   int wTRS, ss, fs;
+   string name;
+   info elem;
+
+   while (!fin.eof())
+   {
+	   for (int i = 0; i < 10; i++)
+		   for (int j = 0; j < 4; j++)
+		   {
+			   fin >> wTRS;
+			   TRS[i][j] = wTRS;
+		   }
+   }
+   
    fin.close();
 
-
+   while (!fin2.eof())
+   {
+	   int index = 0;
+	   fin2 >> name;
+	   fin2 >> ss;
+	   fin2 >> fs;
+	   elem.name = name;
+	   elem.startstate = ss;
+	   elem.finalstate = fs;
+	   DFA[index] = elem;
+	   index++;
+   }
+   
+   fin2.close();
 
 }
 
