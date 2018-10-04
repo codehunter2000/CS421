@@ -62,8 +62,10 @@ bool ident_token(string s)
 	int state = 0;
 	int charpos = 0;
 
+	// loop through string
 	while (s[charpos] != '\0')
 	{
+		// display status 
 		cout << "current state: " << state << endl;
 		cout << "character: " << s[charpos] << endl;
 
@@ -108,8 +110,10 @@ bool real_token(string s)
 	int state = 0;
 	int charpos = 0;
 
+	// loop through string
 	while (s[charpos] != '\0')
 	{
+		// display status
 		cout << "current state: " << state << endl;
 		cout << "character: " << s[charpos] << endl;
 
@@ -232,7 +236,7 @@ int scanner(tokentype& the_type, string& w)
   // ** add other if-then's here in the right order to go through
   // ** all FAs one by one and set the_type to be IDENT, REAL or INT.
 
-
+  // check each case until true is returned 
   else if (ident_token(w))
 	  the_type = IDENT;
   else if (real_token(w))
@@ -246,8 +250,8 @@ int scanner(tokentype& the_type, string& w)
     { cout << "Lexical Error: The string is not in my language" << endl;
       the_type = ERROR; }
 
-
-  return 1;
+	// added to keep compiler happy 
+ return 1;
 
 }//the very end of scanner
 
