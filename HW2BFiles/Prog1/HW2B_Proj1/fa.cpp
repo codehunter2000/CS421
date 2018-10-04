@@ -113,12 +113,17 @@ bool real_token(string s)
 		cout << "current state: " << state << endl;
 		cout << "character: " << s[charpos] << endl;
 
-		if ((state == 0 && s[charpos] == '2') || (state == 0 && s[charpos] == '3') || (state == 0 && s[charpos] == '.'))
+		if ((state == 0 && s[charpos] == '2') || (state == 0 && s[charpos] == '3'))
 			state = 1;
-
-		else if ((state == 1 && s[charpos] == '2') || (state == 1 && s[charpos] == '3')
-			|| (state == 1 && s[charpos] == '.'))
+		else if ((state == 1 && s[charpos] == '2') || (state == 1 && s[charpos] == '3'))
+			state = 1;
+		else if ((state == 0 && s[charpos] == '.') || (state == 1 && s[charpos] == '.'))
 			state = 2;
+		else if ((state == 2 && s[charpos] == '2') || (state == 2 && s[charpos] == '3'))
+			state = 3;
+		else if ((state == 3 && s[charpos] == '2') || (state == 3 && s[charpos] == '3'))
+			state = 3;
+		
 
 		else
 		{
@@ -130,7 +135,7 @@ bool real_token(string s)
 	}//end of while
 
   // where did I end up????
-	if (state == 2) return(true);  // end in a final state
+	if (state == 3) return(true);  // end in a final state
 	else return(false);
 
 
@@ -157,7 +162,9 @@ bool integer_token(string s)
 		if ((state == 0 && s[charpos] == '2') || (state == 0 && s[charpos] == '3'))
 			state = 1;
 		else if ((state == 1 && s[charpos] == '2') || (state == 1 && s[charpos] == '3'))
-			state = 1;
+			state = 2;
+		else if ((state == 2 && s[charpos] == '2') || (state == 2 && s[charpos] == '3'))
+			state = 2;
 
 		else
 		{
