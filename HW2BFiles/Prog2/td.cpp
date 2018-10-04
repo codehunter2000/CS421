@@ -91,6 +91,11 @@ void readTables()
 bool accept(info dfa, string word)
 {
   // ** does the dfa accept the word?
+	// grab second letter on info struct name
+	// if match, accept
+
+
+
 }
 
 
