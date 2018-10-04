@@ -1,5 +1,0 @@
-abbb
-ab
-aabb
-bb
-EOF
