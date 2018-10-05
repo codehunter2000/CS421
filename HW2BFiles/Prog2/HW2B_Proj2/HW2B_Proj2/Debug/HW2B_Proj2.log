@@ -1,2 +1,4 @@
 ﻿  td.cpp
-c:\users\gabriel\source\repos\codehunter2000\cs421\hw2bfiles\prog2\td.cpp(58): error C4716: 'accept': must return a value
+c:\users\gabriel\source\repos\codehunter2000\cs421\hw2bfiles\prog2\td.cpp(100): warning C4018: '<': signed/unsigned mismatch
+c:\users\gabriel\source\repos\codehunter2000\cs421\hw2bfiles\prog2\td.cpp(131): warning C4101: 'accepted': unreferenced local variable
+  HW2B_Proj2.vcxproj -> C:\Users\Gabriel\source\repos\codehunter2000\CS421\HW2BFiles\Prog2\HW2B_Proj2\Debug\HW2B_Proj2.exe

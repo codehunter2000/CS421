@@ -35,46 +35,47 @@ void displayTables()
 		for (int j = 0; j < 4; j++)
 		{
 			if (TRS[i][j] != -1)
-				cout << TRS[i][j];
+				cout << TRS[i][j] << " ";
 			else
-				cout << " ";
+				cout << "  ";
 		}
 		cout << endl;
 	}
 
   // ** display DFA nicely labeled
 	for (info elem : DFA)
-		cout << "Token " << elem.name << ": " << elem.startstate << " is start and ends in " << elem.finalstate << endl;
+		if (elem.name != "")
+			cout << "Token " << elem.name << ": " << elem.startstate << " is start and ends in " << elem.finalstate << endl;
 
 }
 
 void readTables()
 {  
 
-   ifstream fin ("trs.txt", ios::in);
-   ifstream fin2 ("dfa.txt", ios::in);
+   ifstream fin ("C://Users//Gabriel//source//repos//codehunter2000//CS421//HW2BFiles//Prog2//trs.txt", ios::in);
+   ifstream fin2 ("C://Users//Gabriel//source//repos//codehunter2000//CS421//HW2BFiles//Prog2//dfa.txt", ios::in);
    // ** read in the files into TRS and DFA
 
    int wTRS, ss, fs;
-   string name;
+   string name, stuff;
    info elem;
 
-   while (!fin.eof())
-   {
+
 	   for (int i = 0; i < 10; i++)
 		   for (int j = 0; j < 4; j++)
 		   {
-			   fin >> wTRS;
+			   fin >> stuff;
+			   wTRS = stoi(stuff);
 			   TRS[i][j] = wTRS;
 		   }
-   }
+   
    
    fin.close();
 
-   while (!fin2.eof())
+   int index = 0;
+   while (fin2 >> name)
    {
-	   int index = 0;
-	   fin2 >> name;
+	  // fin2 >> name;
 	   fin2 >> ss;
 	   fin2 >> fs;
 	   elem.name = name;
@@ -91,11 +92,29 @@ void readTables()
 bool accept(info dfa, string word)
 {
   // ** does the dfa accept the word?
-	// grab second letter on info struct name
-	// if match, accept
 
+	int state;
+	if (dfa.name != "")
+	{
 
+		for (int i = 0; i < word.length(); i++)
+		{
+			state = 0;
+			if ((state == 0) && (word[i] == dfa.name[0]))
+				state = 1;
+			else if ((state == 1) && (word[i] == dfa.name[0]))
+				state = 1;
+			else if ((state = 1) && (word[i] == dfa.name[1]))
+				state = 2;
+			else
+				return false;
+		}
 
+		return true;
+
+	}
+
+	return false;
 }
 
 
@@ -109,6 +128,7 @@ int main()
   cout << ".....done reading tables...." << endl;
 
   string word;
+  bool accepted;
   while(true)
     { cout << "@@Enter a string: " ;
       cin >> word;
@@ -116,6 +136,17 @@ int main()
       //     if the word is accepted
       // ** if so, display the word and the token name
       // ** if no DFA does, generate a lexical error message.
+	  
+	  for (info elem : DFA)
+	  {
+		  if (accept(elem, word))
+		  {
+			  cout << "word: " << word << "\t" << "token: " << elem.name << endl;
+		  }
+
+		  else
+			  cout << "Lexical error!" << endl;
+	  }
       cout << "do control-C to quit" << endl;
     }
 }

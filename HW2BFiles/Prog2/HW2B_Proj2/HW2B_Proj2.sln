@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HW2B_Proj2", "HW2B_Proj2\HW2B_Proj2.vcxproj", "{C8EA4DE9-5C72-4FA9-BB37-5D24FEDFE188}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2A1F38D5-2E9E-404E-9EFD-34D2614A717C}"
+	ProjectSection(SolutionItems) = preProject
+		..\dfa.txt = ..\dfa.txt
+		..\trs.txt = ..\trs.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
