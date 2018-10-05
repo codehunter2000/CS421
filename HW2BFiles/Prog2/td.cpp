@@ -43,9 +43,13 @@ void displayTables()
 	}
 
   // ** display DFA nicely labeled
-	for (info elem : DFA)
+	info elem;
+	for (int i = 0; i < 4; i++)
+	{
+		elem = DFA[i];
 		if (elem.name != "")
 			cout << "Token " << elem.name << ": " << elem.startstate << " is start and ends in " << elem.finalstate << endl;
+	}
 
 }
 
@@ -65,7 +69,7 @@ void readTables()
 		   for (int j = 0; j < 4; j++)
 		   {
 			   fin >> stuff;
-			   wTRS = stoi(stuff);
+			   sscanf(stuff.c_str(), "%d", &wTRS);
 			   TRS[i][j] = wTRS;
 		   }
    
@@ -129,6 +133,7 @@ int main()
 
   string word;
   bool accepted;
+  info elem;
   while(true)
     { cout << "@@Enter a string: " ;
       cin >> word;
@@ -137,8 +142,9 @@ int main()
       // ** if so, display the word and the token name
       // ** if no DFA does, generate a lexical error message.
 	  
-	  for (info elem : DFA)
+	  for (int i = 0; i < 4; i++)
 	  {
+		  elem = DFA[i];
 		  if (accept(elem, word))
 		  {
 			  cout << "word: " << word << "\t" << "token: " << elem.name << endl;
